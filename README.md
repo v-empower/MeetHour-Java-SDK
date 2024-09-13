@@ -6,7 +6,7 @@ Meet Hour is 100% free video conference solution with End to End Encrypted and m
 # Features:
 ✅  Free Unlimited Time Group Video Conference
 
-✅  Upto 100 Participants Group Meeting
+✅  up to 100 Participants Group Meeting
 
 ✅  Free Video Conference Recording
 

@@ -12,14 +12,14 @@ public class ArchiveMeetings {
     public ArchiveMeetings(Integer id) {
         this.id = id;
     }
-    
+
 
     public String prepare() {
         Map<String, Integer> archiveMeetings = new HashMap<String, Integer>();
         archiveMeetings.put("id", id);
 
         Gson gson = new Gson();
-      
+
         return gson.toJson(archiveMeetings);
     }
 

@@ -13,12 +13,12 @@ public class ApiConstants {
    // (https://meethour.io)
    // Change the below credentials to your own developer credentials
 
-   public String CLIENT_ID = "xl7sr7ul4ksnw5y70ow7s21u58m7z59qp7m5";
+   public String CLIENT_ID = "";
 
-   public String CLIENT_SECRET = "976953f491fc498ffeaa4bd47937852d6d9c76b89628e37dfba43f0ea5201347";
-   public String API_KEY = "457a2a763998892739aae43a75655edea4a888adf4cfd6153be04ecc6e442c6e";
-   public String EMAIL = "jyothi.bai@v-empower.com";
-   public String PASSWORD = "Jyothi@04";
+   public String CLIENT_SECRET = "";
+   public String API_KEY = "";
+   public String EMAIL = "";
+   public String PASSWORD = "";
 
 }
 

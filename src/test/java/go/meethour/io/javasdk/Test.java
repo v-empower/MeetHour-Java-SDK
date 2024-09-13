@@ -23,9 +23,8 @@ import go.meethour.io.javasdk.types.ViewMeeting;
 public class Test {
         public static void main(String[] args)
                         throws Exception {
-                LoginType loginDetails = new LoginType("xl7sr7ul4ksnw5y70ow7s21u58m7z59qp7m5",
-                                "976953f491fc498ffeaa4bd47937852d6d9c76b89628e37dfba43f0ea5201347", "password",
-                                "jyothi.bai@v-empower.com", "Jyothi@04");
+                LoginType loginDetails = new LoginType("Client_Id","Client_Secret", "Grant_type","Email", "Password");
+                                //Changes the values accordingly for client_id, client_secret,grant_type,email,password.
                 ApiServices apiServices = new ApiServices();
                 String response = apiServices.login(loginDetails);
                 System.out.println("Login Response:" + response);
@@ -39,9 +38,9 @@ public class Test {
                 System.out.println("RefreshToken:" + tokens);
                 System.out.println("-------------------------------------------------------------");
 
-                AddContactType contactDetails = new AddContactType("krishnaram@gmail.com",
-                                "Krishna", "Ram",
-                                "123456789", " US", " ", true);
+                AddContactType contactDetails = new AddContactType("email",
+                                "first_name", "last_name",
+                                "phone number", "country_code", " ", true); //Changes the values accordingly email,first_name,last_name,phone number,country_code.
                 String contactObject = apiServices.addcontact(contactDetails, access_token);
                 System.out.println("AddContact Response:" + contactObject);
                 System.out.println("==================================================================");
@@ -51,27 +50,27 @@ public class Test {
                 System.out.println("Contact Response:" + contactResponse);
                 System.out.println("==================================================================");
 
-                EditContactType contacts = new EditContactType(8565, "+91",
-                                "johndoee@email.com", "John", "Doee", " ",
+                EditContactType contacts = new EditContactType(0000, "country_code",
+                                "email", "first_name", "last_name", " ",
                                 true,
-                                "1234567890");
+                                "phone number");//Changes the values accordingly contact_id,country_code,email,first_name,last_name,phone number.
                 String editresponse = apiServices.editcontact(contacts, access_token);
                 System.out.println("EditContact Response:" + editresponse);
                 System.out.println("==================================================================");
 
-                ScheduleMeetingType meeting = new ScheduleMeetingType(" API Calls ", "123456789 ", " 04:00",
-                                " PM",
-                                "29-08-2024", "Kolkata", 1, 1, null, null, null);
-                String scheduleObject = apiServices.schedulemeeting(meeting, access_token);
+                ScheduleMeetingType meeting = new ScheduleMeetingType(" meeting_name ", "pass_code ", " meeting_time",
+                                " meridian",
+                                "meeting_date", "timezone", 1, 1, null, null, null);
+                String scheduleObject = apiServices.schedulemeeting(meeting, access_token); //Changes the values accordingly meeting_name,pass_code,meeting_time,meridian,meeting_date,timezone.
                 System.out.println("ScheduleMeeting Response:" + scheduleObject);
                 System.out.println("==================================================================");
 
-                EditMeeting editmeeting = new EditMeeting("MHR23111565929 ");
+                EditMeeting editmeeting = new EditMeeting("meeting_id "); //Changes the values accordingly meeting_id.
                 String editmeetingObject = apiServices.editmeeting(editmeeting, access_token);
                 System.out.println("Edit Meeting Response:" + editmeetingObject);
                 System.out.println("==================================================================");
 
-                GenerateJwt jwt = new GenerateJwt("MHR23111565929");
+                GenerateJwt jwt = new GenerateJwt("meeting_id"); //Changes the values accordingly meeting_id.
                 String jwtObject = apiServices.generatejwt(jwt, access_token);
                 System.out.println("Generate Jwt Response:" + jwtObject);
                 System.out.println("==================================================================");
@@ -91,12 +90,12 @@ public class Test {
                 System.out.println("Missed Meeting Response:" + missedObject);
                 System.out.println("==================================================================");
 
-                ArchiveMeetings archive = new ArchiveMeetings(65929);
+                ArchiveMeetings archive = new ArchiveMeetings(0);
                 String archiveObject = apiServices.archivemeetings(archive, access_token);
                 System.out.println("ArchiveMeeting Response: " + archiveObject);
                 System.out.println("==================================================================");
 
-                ViewMeeting view = new ViewMeeting("MHR23111565929");
+                ViewMeeting view = new ViewMeeting("meeting_id");//Changes the values accordingly meeting_id.
                 String viewObject = apiServices.viewmeeting(view, access_token);
                 System.out.println("ViewMeeting Response:" + viewObject);
                 System.out.println("==================================================================");
@@ -116,9 +115,9 @@ public class Test {
                 System.out.println("UserDetails Response:" + userObject);
                 System.out.println("==================================================================");
 
-                RefreshToken refresh = new RefreshToken("xl7sr7ul4ksnw5y70ow7s21u58m7z59qp7m5",
-                                "976953f491fc498ffeaa4bd47937852d6d9c76b89628e37dfba43f0ea5201347", tokens,
-                                access_token);
+                RefreshToken refresh = new RefreshToken("client_id",
+                                "client_secret", tokens,
+                                access_token); //Changes the values accordingly for client_id, client_secret
                 String refreshObject = apiServices.refreshtoken(refresh);
                 System.out.println("RefreshToken Response: " + refreshObject);
 

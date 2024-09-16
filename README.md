@@ -46,20 +46,121 @@ Provide your credentials in the constructor of Login object and hit the login ap
 ```
 <%@ page import="go.meethour.io.javasdk.services.ApiServices"%>
 <%@ page import="go.meethour.io.javasdk.types.LoginType"%>
+<%@ page import="go.meethour.io.javasdk.types.GenerateJwt" %>
 <%@ page import="go.meethour.io.javasdk.types.ViewMeeting" %>
 <%@ page import="go.meethour.io.javasdk.types.ScheduleMeetingType" %>
+<%@ page import="org.json.JSONObject" %>
+<%
+ String  CONFERENCE_URL = "meethour.io";
+ String GRANT_TYPE = "password";
+ String GRANT_REFRESH_TYPE = "refresh_token";
+ String BASE_URL = "https://api.meethour.io";
+ String API_VERSION = "v1.2";
+ String API_RELEASE = "v2.4.6";
 
-    LoginType loginDetails = new LoginType(CLIENT_ID,CLIENT_SECRET, GRANT_TYPE,EMAIL, PASSWORD); # pass value
-    String ogin_response = apiServices.login(loginDetails);
-    System.out.println(login_response);
+ String CLIENT_ID = "";
+ String CLIENT_SECRET = "";
+ String API_KEY = "";
+ String EMAIL = "";
+ String PASSWORD = "";
+ ApiServices apiServices = new ApiServices();
 
-    ScheduleMeetingType meeting = new ScheduleMeetingType(meeting_name, passcode, meeting_time, meeting_meridiem,meeting_date, timezone, 1, 1,  null,null,null); #pass value
-    String schedule_meeting_response = apiServices.schedulemeeting(meeting, access_token);
-    System.out.println(schedule_meeting_response);
+ LoginType loginDetails = new LoginType(CLIENT_ID,CLIENT_SECRET, GRANT_TYPE,EMAIL, PASSWORD);
+ String loginresponse = apiServices.login(loginDetails);
 
-    ViewMeeting view = new ViewMeeting(meeting_id); #pass value
-    String view_meetings_response = apiServices.viewmeeting(view, access_token);
-    System.out.println(view_meetings_response);
+ JSONObject responsesObject = new JSONObject(loginresponse);
+ String access_token = responsesObject.getString("access_token");
+
+ String meeting_name = "API Calls";
+ String passcode = "123456789";
+ String timezone = "Asia/Kolkata";
+ String meeting_date = "23-06-2030";
+ String meeting_time = "10:00";
+ String meeting_meridiem = "PM";
+ int send_calendar_invite = 1;
+ int is_show_portal = 1;
+ String options=null;
+ String attend=null;
+ String hostusers=null;
+
+ScheduleMeetingType meeting = new ScheduleMeetingType(meeting_name, passcode, meeting_time, meeting_meridiem,meeting_date, timezone, 1, 1,  null,null,null);
+String scheduleObject = apiServices.schedulemeeting(meeting, access_token);
+JSONObject scheduleresponses = new JSONObject(scheduleObject);
+
+JSONObject data = scheduleresponses.getJSONObject("data");
+
+String meeting_id = data.getString("meeting_id");
+
+String pCode = data.getString("pcode");
+
+
+
+ViewMeeting view = new ViewMeeting(meeting_id);
+String viewObject = apiServices.viewmeeting(view, access_token);
+String viewmeetingResponse=viewObject;
+
+GenerateJwt jwt = new GenerateJwt(meeting_id);
+String jwtObject = apiServices.generatejwt(jwt, access_token);
+JSONObject jwtresponses = new JSONObject(jwtObject);
+String JwtToken = jwtresponses.getString("jwt");
+
+
+%>
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            #conference-parent {
+                height: 100%;
+            }
+        </style>
+    </head>
+<body>
+    <script type="text/javascript" src="https://api.meethour.io/libs/<%= API_RELEASE %>/external_api.min.js?apiKey=<%= API_KEY %>"></script>
+    <div class="relative" id="conference-parent"></div>
+    <script type="text/javascript">
+        try {
+            const conferencePanel = document.createElement("div");
+            conferencePanel.setAttribute("id", "conference");
+            conferencePanel.setAttribute("style", "height: 100%;");
+            const meetingPanel = document.querySelector("#conference-parent");
+            meetingPanel.appendChild(conferencePanel);
+            var domain = "<%= CONFERENCE_URL %>";
+            var options = {
+                roomName: "<%= meeting_id %>",
+                parentNode: document.querySelector("#conference"),
+                jwt: "<%= JwtToken %>",
+                apiKey: "<%= API_KEY %>",
+                pcode: "<%= pCode %>",
+                interfaceConfigOverwrite: {
+                    applyMeetingSettings: true,
+                    disablePrejoinHeader: true,
+                    disablePrejoinFooter: true,
+                    SHOW_MEET_HOUR_WATERMARK: false,
+                    ENABLE_DESKTOP_DEEPLINK: false,
+                    HIDE_DEEP_LINKING_LOGO: true,
+                    MOBILE_APP_PROMO: false,
+                    ENABLE_MOBILE_BROWSER: true,
+                },
+            };
+            var api = new MeetHourExternalAPI(domain, options);
+        } catch (error) {
+            console.log(error);
+        }
+    </script>
+</body>
+</html>
+
 ```
 ### API End Points Supported
 Important points:

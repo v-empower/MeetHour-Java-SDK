@@ -6,11 +6,14 @@
 
   <groupId>go.meethour.io.javasdk</groupId>
   <artifactId>meethour_sdk</artifactId>
-  <version>0</version>
+  <version>1.0.0</version>
 
   <name>meethour_sdk</name>
+  <description>
+    This is Java SDK for Meet Hour video conference application. Meet Hour (https://meethour.io) is HD Quality video conference app. 
+  </description>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>https://meethour.io</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

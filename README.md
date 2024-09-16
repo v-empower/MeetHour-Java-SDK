@@ -22,12 +22,19 @@ Meet Hour is 100% free video conference solution with End to End Encrypted and m
 ![Alt text](screenshot.png)
 
 # MeetHour API Documentation
-API Documentation Link - https://docs.v-empower.com/docs/MeetHour-API/
+
+    API Documentation Link - https://docs.v-empower.com/docs/MeetHour-API/
 
 ## Meet Hour Java Example
 
 ```
-https://github.com/v-empower/MeetHour-Web-MobileSDKs/tree/master/Java/Core-Java
+    https://github.com/v-empower/MeetHour-Web-MobileSDKs/tree/master/Java/Core-Java
+```
+
+## Maven Repo
+
+```
+    https://repo.meethour.io/maven/releases/go/meethour/io/javasdk/meethour_sdk/
 ```
 
 ## Install
